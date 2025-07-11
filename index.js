@@ -1,23 +1,42 @@
-const mysubmit = document.getElementById("mysubmit");
-const myage = document.getElementById("myage");
-const result = document.getElementById("result");
-let age;
+function generatepassword( length, includelowercase, includeuppercase, includenumbers, includesymbols ){
 
-mysubmit.onclick = function(){
-    age = myage.value;
-    age = Number(age);
+    const lowercasechars = "abcdefghijklmnopqrstuvwxyz";
+const uppercasechars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const numberschars = "0123456789";
+const symbolschars = "!'()*+-./:<=>?@[\]^_`{|}~";
 
-    if (age == 0 ){
-        result.textContent = "dwadw";
-    }
-    else if (age >=20){
-        result.textContent =`your age is ${age} so you can drive`;
-        console.log(typeof age);
-    }
-    else{
-        result.textContent = "you cant drive";
-    }
+let allowedchars = "";
+let password = "";
+
+allowedchars  += includelowercase ? lowercasechars : "";
+allowedchars  += includeuppercase ? uppercasechars : "";
+allowedchars  += includenumbers ? numberschars : "";
+allowedchars  += includesymbols ? symbolschars : "";
+
+ if(length <= 0){
+    return `(Password Length must be at least 1)`;
+ }
+ if (allowedchars.length === 0 ){
+    return `(atleast 1 set of characters needs to be selected)`;
+ }
+ for(let i = 0; i < length; i++){
+    const randomindex = Math.floor(Math.random() * allowedchars.length);
+    password += allowedchars[randomindex];
+ }
+
+    return password;
 }
+
+
+const passwordlength = 12;
+const includelowercase = true;
+const includeuppercase = true;
+const includenumbers = true;
+const includesymbols = true;
+
+const password =  generatepassword( passwordlength, includelowercase, includeuppercase, includenumbers, includesymbols );
+
+console.log(`Generated Password: ${password}`);
 
 
 
@@ -96,6 +115,27 @@ balik.onclick = function()
     myh2.textContent = bt0;
     myh3.textContent = bt0;
     total.textContent = bt0;
+}
+
+const mysubmit = document.getElementById("mysubmit");
+const myage = document.getElementById("myage");
+const result = document.getElementById("result");
+let age;
+
+mysubmit.onclick = function(){
+    age = myage.value;
+    age = Number(age);
+
+    if (age == 0 ){
+        result.textContent = "dwadw";
+    }
+    else if (age >=20){
+        result.textContent =`your age is ${age} so you can drive`;
+        console.log(typeof age);
+    }
+    else{
+        result.textContent = "you cant drive";
+    }
 }
 */
 
